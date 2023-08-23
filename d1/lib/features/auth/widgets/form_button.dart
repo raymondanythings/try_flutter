@@ -7,8 +7,10 @@ class FormButton extends StatelessWidget {
     super.key,
     required this.disabled,
     this.onTap,
+    this.padding,
   });
   final bool disabled;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,11 @@ class FormButton extends StatelessWidget {
         duration: const Duration(
           milliseconds: 100,
         ),
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size10,
-          horizontal: Sizes.size20,
-        ),
+        padding: padding ??
+            const EdgeInsets.symmetric(
+              vertical: Sizes.size10,
+              horizontal: Sizes.size20,
+            ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             999,

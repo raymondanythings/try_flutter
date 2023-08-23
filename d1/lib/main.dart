@@ -18,8 +18,12 @@ class Twitter extends StatelessWidget {
         primaryColor: const Color(0xff4F98E9),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
         ),
         useMaterial3: true,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+        ),
       ),
       home: const LandingScreen(),
     );
