@@ -1,8 +1,7 @@
 import 'package:d1/constants/gaps.dart';
 import 'package:d1/constants/sizes.dart';
 import 'package:d1/features/auth/experience_screen.dart';
-import 'package:d1/features/auth/landing_screen.dart';
-import 'package:d1/features/auth/widgets/auth_button.dart';
+import 'package:d1/features/auth/verification_screen.dart';
 import 'package:d1/features/auth/widgets/form_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +30,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onConfirm() {
-    Navigator.of(context).pushAndRemoveUntil(
+    Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const LandingScreen(),
+        builder: (context) => VerificationScreen(
+          email: _email,
+        ),
       ),
-      (route) => false,
     );
   }
 

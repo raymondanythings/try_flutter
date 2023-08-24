@@ -2,15 +2,17 @@ import 'package:d1/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class FormButton extends StatelessWidget {
-  final Function()? onTap;
   const FormButton({
     super.key,
     required this.disabled,
     this.onTap,
     this.padding,
+    this.text,
   });
+  final Function()? onTap;
   final bool disabled;
   final EdgeInsetsGeometry? padding;
+  final Widget? text;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +43,14 @@ class FormButton extends StatelessWidget {
             color: disabled ? Colors.grey.shade400 : Colors.white,
             fontWeight: FontWeight.w600,
           ),
-          child: const Text(
-            "Next",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          child: text ??
+              const Text(
+                "Next",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
         ),
       ),
     );
