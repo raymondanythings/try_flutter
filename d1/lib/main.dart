@@ -1,8 +1,18 @@
 import 'package:d1/features/auth/landing_screen.dart';
+import 'package:d1/features/onboard/interests_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const Twitter());
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
 }
 
 class Twitter extends StatelessWidget {
@@ -23,6 +33,10 @@ class Twitter extends StatelessWidget {
         useMaterial3: true,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
+        ),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Colors.white,
+          surfaceTintColor: Colors.white,
         ),
       ),
       home: const LandingScreen(),
