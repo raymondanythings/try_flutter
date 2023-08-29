@@ -1,10 +1,34 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
+import 'package:d2/features/feeds/widgets/avatar.dart';
+import 'package:d2/tab_navigation/widgets/members_avatar.dart';
 import 'package:flutter/material.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Feed extends StatelessWidget {
-  const Feed({super.key});
+  final bool verified;
+  final int replices;
+  final int likes;
+
+  final String title;
+  final String thread;
+  final String before;
+
+  final String mainAvatar;
+  final List<String>? ImageList;
+
+  const Feed({
+    super.key,
+    this.verified = false,
+    this.replices = 0,
+    this.likes = 0,
+    required this.title,
+    required this.thread,
+    required this.before,
+    required this.mainAvatar,
+    this.ImageList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,113 +45,176 @@ class Feed extends StatelessWidget {
         horizontal: Sizes.size14,
         vertical: Sizes.size14,
       ),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(
-                      Sizes.size10,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(999),
-                      ),
-                    ),
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: Image.asset(
-                        'assets/threads_logo.png',
-                        fit: BoxFit.fill,
-                        width: Sizes.size32,
-                        height: Sizes.size32,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -Sizes.size6,
-                    right: -Sizes.size6,
-                    child: Container(
-                      padding: const EdgeInsets.all(
-                        Sizes.size4,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            999,
-                          ),
-                        ),
-                      ),
-                      child: const FaIcon(
-                        FontAwesomeIcons.circlePlus,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const Text("1"),
-            ],
-          ),
-          Gaps.h16,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "pubity",
-                        style: TextStyle(
-                          fontSize: Sizes.size16,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Gaps.h2,
-                      Image(
-                        width: Sizes.size20,
-                        image: AssetImage('assets/verified.png'),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "2m",
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ),
-                      Gaps.h24,
-                      const FaIcon(
-                        FontAwesomeIcons.ellipsis,
-                      )
-                    ],
-                  )
-                ],
+              Avatar(
+                imageUrl: mainAvatar,
               ),
-              Gaps.v6,
-              const Text(
-                "Vine after seeing the Threads logo unveiled",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  overflow: TextOverflow.ellipsis,
+              Gaps.h28,
+              Flexible(
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                fontSize: Sizes.size16,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            verified
+                                ? const Row(
+                                    children: [
+                                      Gaps.h2,
+                                      Image(
+                                        width: Sizes.size20,
+                                        height: Sizes.size20,
+                                        image:
+                                            AssetImage('assets/verified.png'),
+                                      ),
+                                    ],
+                                  )
+                                : Container(),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  before,
+                                  style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                ),
+                                Gaps.h24,
+                                const FaIcon(
+                                  FontAwesomeIcons.ellipsis,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    Gaps.v4,
+                    Text(
+                      thread,
+                      style: const TextStyle(
+                        fontSize: Sizes.size16,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
+          Gaps.v10,
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Gaps.h12,
+                VerticalDivider(
+                  thickness: 2,
+                  width: 20,
+                  color: Colors.grey.shade400,
+                ),
+                Gaps.h36,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: Sizes.size2,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ImageList != null
+                            ? Container(
+                                padding: const EdgeInsets.only(
+                                  bottom: Sizes.size10,
+                                ),
+                                height: 128,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemCount: ImageList!.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          Sizes.size12,
+                                        ),
+                                      ),
+                                      clipBehavior: Clip.hardEdge,
+                                      height: 128,
+                                      child: Image(
+                                        fit: BoxFit.contain,
+                                        image: NetworkImage(
+                                          ImageList![index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Gaps.h10;
+                                  },
+                                ),
+                              )
+                            : Container(),
+                        Wrap(
+                          spacing: Sizes.size14,
+                          children: [
+                            const FaIcon(
+                              FontAwesomeIcons.heart,
+                            ),
+                            Transform.flip(
+                              flipX: true,
+                              child: const FaIcon(
+                                FontAwesomeIcons.comment,
+                              ),
+                            ),
+                            const FaIcon(
+                              FontAwesomeIcons.retweet,
+                            ),
+                            const FaIcon(
+                              FontAwesomeIcons.paperPlane,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Gaps.v10,
+          Row(
+            children: [
+              const MembersAvatar(),
+              Gaps.h28,
+              Text(
+                "$replices replice · $likes likes",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
