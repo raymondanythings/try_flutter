@@ -1,5 +1,4 @@
 import 'package:d1/features/auth/landing_screen.dart';
-import 'package:d1/features/onboard/interests_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

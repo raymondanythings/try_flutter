@@ -1,4 +1,3 @@
-import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/feed_screen.dart';
 import 'package:d2/tab_navigation/widgets/nav_tab.dart';
 import 'package:flutter/material.dart';

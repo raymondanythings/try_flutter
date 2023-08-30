@@ -1,6 +1,7 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/avatar.dart';
+import 'package:d2/features/feeds/widgets/feed_sheet.dart';
 import 'package:d2/tab_navigation/widgets/members_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,14 @@ class Feed extends StatelessWidget {
     required this.mainAvatar,
     this.ImageList,
   });
+
+  void _onMoreTap(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const FeedSheet(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +110,11 @@ class Feed extends StatelessWidget {
                                   ),
                                 ),
                                 Gaps.h24,
-                                const FaIcon(
-                                  FontAwesomeIcons.ellipsis,
+                                GestureDetector(
+                                  onTap: () => _onMoreTap(context),
+                                  child: const FaIcon(
+                                    FontAwesomeIcons.ellipsis,
+                                  ),
                                 ),
                               ],
                             )
