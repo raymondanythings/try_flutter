@@ -78,8 +78,8 @@ class FeedSheet extends StatelessWidget {
                   Navigator.push(
                     context,
                     ModalBottomSheetRoute(
-                      builder: (context) => const ReportSheet(),
                       isScrollControlled: false,
+                      builder: (context) => const ReportSheet(),
                     ),
                   );
                 },
