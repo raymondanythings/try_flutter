@@ -18,6 +18,7 @@ class Feed extends StatelessWidget {
 
   final String mainAvatar;
   final List<String>? ImageList;
+  final bool isAdd;
 
   const Feed({
     super.key,
@@ -29,6 +30,7 @@ class Feed extends StatelessWidget {
     required this.before,
     required this.mainAvatar,
     this.ImageList,
+    this.isAdd = true,
   });
 
   void _onMoreTap(BuildContext context) {
@@ -63,6 +65,7 @@ class Feed extends StatelessWidget {
             children: [
               Avatar(
                 imageUrl: mainAvatar,
+                isAdd: isAdd,
               ),
               Gaps.h28,
               Flexible(

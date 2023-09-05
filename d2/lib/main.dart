@@ -14,8 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Threads',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+        ),
+        splashColor: Colors.transparent,
       ),
       home: const MainNavigationScreen(),
     );

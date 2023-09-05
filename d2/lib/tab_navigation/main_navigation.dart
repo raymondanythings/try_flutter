@@ -1,6 +1,9 @@
 import 'package:d2/constants/sizes.dart';
+import 'package:d2/features/activity/activity_screen.dart';
 import 'package:d2/features/feeds/feed_screen.dart';
 import 'package:d2/features/feeds/widgets/write_feed.dart';
+import 'package:d2/features/search/search_screen.dart';
+import 'package:d2/features/users/users_profile_screen.dart';
 import 'package:d2/tab_navigation/widgets/nav_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,18 +19,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
     with SingleTickerProviderStateMixin {
   final screens = [
     const FeedScreen(),
+    const SearchScreen(),
     const Center(
       child: Text("Search"),
     ),
-    const Center(
-      child: Text("Home"),
-    ),
-    const Center(
-      child: Text("Search"),
-    ),
-    const Center(
-      child: Text("Search"),
-    ),
+    const ActivityScreen(),
+    const UserProfileSCreen(),
   ];
 
   int _selectedIndex = 0;
