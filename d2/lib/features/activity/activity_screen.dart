@@ -31,7 +31,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Search",
+            "Activity",
             style: TextStyle(
               fontSize: Sizes.size36,
               fontWeight: FontWeight.bold,
@@ -87,7 +87,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     "rjmithun",
                     style: TextStyle(
                       fontSize: Sizes.size14,
-                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -109,15 +108,17 @@ class _ActivityScreenState extends State<ActivityScreen> {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Mithun",
+                  Opacity(
+                    opacity: 0.7,
+                    child: Text(
+                      "Mithun",
+                    ),
                   ),
                   Gaps.v4,
                   Text(
                     "Here's a thread you should follow if you love botarny @jane_mobbin",
                     style: TextStyle(
                       fontSize: Sizes.size14,
-                      color: Colors.black,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

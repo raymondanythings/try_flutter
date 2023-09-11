@@ -36,7 +36,6 @@ class SearchTile extends StatelessWidget {
               "rjmithun",
               style: TextStyle(
                 fontSize: Sizes.size14,
-                color: Colors.black,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -55,16 +54,21 @@ class SearchTile extends StatelessWidget {
         subtitle: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Mithun",
+            Opacity(
+              opacity: 0.5,
+              child: Text(
+                "Mithun",
+              ),
             ),
             Gaps.v10,
-            Text(
-              "26.6K followers",
-              style: TextStyle(
-                fontSize: Sizes.size14,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
+            Opacity(
+              opacity: 0.7,
+              child: Text(
+                "26.6K followers",
+                style: TextStyle(
+                  fontSize: Sizes.size14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],
@@ -89,7 +93,6 @@ class SearchTile extends StatelessWidget {
                 "Follow",
                 style: TextStyle(
                   fontSize: Sizes.size14,
-                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),

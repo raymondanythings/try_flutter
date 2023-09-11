@@ -1,4 +1,5 @@
 import 'package:d2/constants/sizes.dart';
+import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,6 +22,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
@@ -49,11 +51,11 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
             leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Center(
+              child: Center(
                 child: Wrap(
                   spacing: Sizes.size4,
                   children: [
-                    FaIcon(
+                    const FaIcon(
                       FontAwesomeIcons.chevronLeft,
                       size: Sizes.size20,
                     ),
@@ -61,6 +63,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                       "Back",
                       style: TextStyle(
                         fontSize: Sizes.size16,
+                        color: isDark ? Colors.white : null,
                       ),
                     ),
                   ],
@@ -80,7 +83,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               "Private profile",
             ),
             trailing: Switch.adaptive(
-              activeColor: Colors.black,
+              activeColor: isDark ? null : Colors.black,
               value: _notifications,
               onChanged: _onNotificationsChanged,
             ),

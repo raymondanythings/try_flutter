@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/settings/privacy_screen.dart';
+import 'package:d2/utils.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -18,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isLoading = false;
 
   void _popNavigation() {
-    Navigator.of(context).pop();
+    context.pop();
   }
 
   void _onLogout() {
@@ -62,6 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
@@ -90,19 +93,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Center(
+              child: Center(
                 child: Wrap(
                   spacing: Sizes.size4,
                   children: [
-                    FaIcon(
+                    const FaIcon(
                       FontAwesomeIcons.chevronLeft,
                       size: Sizes.size20,
                     ),
                     Text(
                       "Back",
                       style: TextStyle(
-                        fontSize: Sizes.size16,
-                      ),
+                          fontSize: Sizes.size16,
+                          color: isDark ? Colors.white : null),
                     ),
                   ],
                 ),
@@ -130,11 +133,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const PrivacyScreen(),
-              ),
-            ),
+            onTap: () => context.push("/settings/privacy"),
             child: const ListTile(
               leading: FaIcon(
                 FontAwesomeIcons.userLock,

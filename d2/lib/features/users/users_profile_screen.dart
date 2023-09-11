@@ -3,8 +3,10 @@ import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/avatar.dart';
 import 'package:d2/features/settings/setting_screen.dart';
+import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class UserProfileSCreen extends StatefulWidget {
   const UserProfileSCreen({super.key});
@@ -15,11 +17,12 @@ class UserProfileSCreen extends StatefulWidget {
 
 class _UserProfileSCreenState extends State<UserProfileSCreen> {
   void _onGearPressed() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const SettingsScreen(),
-      ),
-    );
+    context.push("/settings");
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const SettingsScreen(),
+    //   ),
+    // );
   }
 
   @override
@@ -255,18 +258,21 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final isDark = isDarkMode(context);
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: isDark
+            ? const Color(
+                0xFF111111,
+              )
+            : Colors.white,
       ),
       child: const TabBar(
         labelPadding: EdgeInsets.symmetric(
           vertical: Sizes.size10,
         ),
-        indicatorColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 1,
-        labelColor: Colors.black,
         tabs: [
           Padding(
             padding: EdgeInsets.symmetric(
@@ -350,7 +356,6 @@ class ProfileFeed extends StatelessWidget {
                         title,
                         style: const TextStyle(
                           fontSize: Sizes.size16,
-                          color: Colors.black87,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -362,9 +367,9 @@ class ProfileFeed extends StatelessWidget {
                         children: [
                           Text(
                             before,
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                            ),
+                            // style: TextStyle(
+                            //   color: Colors.black.withOpacity(0.5),
+                            // ),
                           ),
                           Gaps.h24,
                           GestureDetector(
@@ -474,7 +479,6 @@ class ReplyFeed extends StatelessWidget {
                             title,
                             style: const TextStyle(
                               fontSize: Sizes.size16,
-                              color: Colors.black87,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

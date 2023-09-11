@@ -83,7 +83,6 @@ class Feed extends StatelessWidget {
                               title,
                               style: const TextStyle(
                                 fontSize: Sizes.size16,
-                                color: Colors.black87,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -106,10 +105,10 @@ class Feed extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  before,
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
+                                Opacity(
+                                  opacity: 0.5,
+                                  child: Text(
+                                    before,
                                   ),
                                 ),
                                 Gaps.h24,
@@ -222,10 +221,10 @@ class Feed extends StatelessWidget {
             children: [
               const MembersAvatar(),
               Gaps.h28,
-              Text(
-                "$replices replice · $likes likes",
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
+              Opacity(
+                opacity: 0.5,
+                child: Text(
+                  "$replices replice · $likes likes",
                 ),
               ),
             ],

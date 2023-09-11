@@ -40,6 +40,7 @@ class Avatar extends StatelessWidget {
                   child: const FaIcon(
                     FontAwesomeIcons.circlePlus,
                     size: Sizes.size20,
+                    color: Colors.black,
                   ),
                 ),
               )

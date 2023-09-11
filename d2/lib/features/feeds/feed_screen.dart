@@ -1,6 +1,7 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/feed.dart';
+import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -8,21 +9,27 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: SingleChildScrollView(
         child: Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: Sizes.size20,
             ),
             child: Column(
               children: [
-                Image(
-                  width: Sizes.size52,
-                  image: AssetImage('assets/threads_logo.png'),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isDarkMode(context) ? Colors.white : null,
+                  ),
+                  child: const Image(
+                    width: Sizes.size52,
+                    image: AssetImage('assets/threads_logo.png'),
+                  ),
                 ),
                 Gaps.v32,
-                Feed(
+                const Feed(
                   before: "2h",
                   mainAvatar:
                       "https://source.unsplash.com/random/128x128/?avatar",
@@ -33,7 +40,7 @@ class FeedScreen extends StatelessWidget {
                   replices: 64,
                   likes: 631,
                 ),
-                Feed(
+                const Feed(
                   before: "2h",
                   mainAvatar:
                       "https://source.unsplash.com/random/128x128/?avatar",
@@ -48,7 +55,7 @@ class FeedScreen extends StatelessWidget {
                   replices: 64,
                   likes: 631,
                 ),
-                Feed(
+                const Feed(
                   before: "2h",
                   mainAvatar:
                       "https://source.unsplash.com/random/128x128/?girl",
@@ -59,7 +66,7 @@ class FeedScreen extends StatelessWidget {
                   replices: 8,
                   likes: 74,
                 ),
-                Feed(
+                const Feed(
                   before: "2h",
                   mainAvatar:
                       "https://pbs.twimg.com/profile_images/1337189109631246338/tJyPJ4qh_400x400.jpg",
@@ -74,7 +81,7 @@ class FeedScreen extends StatelessWidget {
                   replices: 8012,
                   likes: 74348,
                 ),
-                Feed(
+                const Feed(
                   before: "now",
                   mainAvatar:
                       "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg",
@@ -88,7 +95,7 @@ class FeedScreen extends StatelessWidget {
                   replices: 250,
                   likes: 477,
                 ),
-                Feed(
+                const Feed(
                   before: "now",
                   mainAvatar:
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png",

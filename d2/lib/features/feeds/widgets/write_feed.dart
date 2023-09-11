@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/image_upload_screen.dart';
+import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -66,6 +67,7 @@ class _WriteFeedState extends State<WriteFeed> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
@@ -91,9 +93,13 @@ class _WriteFeedState extends State<WriteFeed> {
                   color: Colors.grey.shade200,
                 ),
               ),
+              color: isDark
+                  ? const Color(
+                      0xFF111111,
+                    )
+                  : null,
             ),
             child: AppBar(
-              automaticallyImplyLeading: false,
               centerTitle: true,
               title: const Text(
                 "New thread",
@@ -105,12 +111,12 @@ class _WriteFeedState extends State<WriteFeed> {
               leadingWidth: 65,
               leading: GestureDetector(
                 onTap: _onCancelTap,
-                child: const Center(
+                child: Center(
                   child: Text(
                     "Cancel",
                     style: TextStyle(
-                      fontSize: Sizes.size16 + Sizes.size2,
-                    ),
+                        fontSize: Sizes.size16 + Sizes.size2,
+                        color: isDark ? Colors.white : null),
                   ),
                 ),
               ),
@@ -192,15 +198,22 @@ class _WriteFeedState extends State<WriteFeed> {
                                   fontSize: Sizes.size12,
                                 ),
                                 cursorColor: Colors.blue[800],
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "Start a thread...",
-                                  contentPadding: EdgeInsets.symmetric(
+                                  hintStyle: TextStyle(
+                                    color: isDark
+                                        ? Colors.white.withOpacity(
+                                            0.7,
+                                          )
+                                        : null,
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
                                     vertical: Sizes.size1,
                                   ),
-                                  border: UnderlineInputBorder(
+                                  border: const UnderlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
+                                  enabledBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
@@ -236,10 +249,9 @@ class _WriteFeedState extends State<WriteFeed> {
                                               child: GestureDetector(
                                                 onTap: () =>
                                                     _removePicture(index),
-                                                child: FaIcon(
+                                                child: const FaIcon(
                                                   FontAwesomeIcons
                                                       .solidCircleXmark,
-                                                  color: Colors.grey.shade400,
                                                 ),
                                               ),
                                             ),
@@ -301,7 +313,6 @@ class _WriteFeedState extends State<WriteFeed> {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
       ),
     );
   }

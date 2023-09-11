@@ -7,9 +7,15 @@ import 'package:d2/features/users/users_profile_screen.dart';
 import 'package:d2/tab_navigation/widgets/nav_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  static const String routeName = "mainNavigation";
+  final String tab;
+  const MainNavigationScreen({
+    super.key,
+    required this.tab,
+  });
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
@@ -17,20 +23,13 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen>
     with SingleTickerProviderStateMixin {
-  final screens = [
-    const FeedScreen(),
-    const SearchScreen(),
-    const Center(
-      child: Text("Search"),
-    ),
-    const ActivityScreen(),
-    const UserProfileSCreen(),
-  ];
+  final _tabs = ["", "search", "activity", "profile"];
 
-  int _selectedIndex = 0;
+  late int _selectedIndex = _tabs.indexOf(widget.tab);
   late AnimationController _modalAnimateController;
 
   void _onTap(int index) {
+    context.pushReplacement("/${_tabs[index]}");
     setState(() {
       _selectedIndex = index;
     });
@@ -42,7 +41,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
       useSafeArea: false,
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
       builder: (context) => const FractionallySizedBox(
         heightFactor: 0.93,
         widthFactor: 1,
@@ -90,10 +89,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
           ),
         ),
         child: Scaffold(
-          body: screens.elementAt(_selectedIndex),
+          body: Stack(
+            children: [
+              Offstage(
+                offstage: _selectedIndex != 0,
+                child: const FeedScreen(),
+              ),
+              Offstage(
+                offstage: _selectedIndex != 1,
+                child: const SearchScreen(),
+              ),
+              Offstage(
+                offstage: _selectedIndex != 2,
+                child: const ActivityScreen(),
+              ),
+              Offstage(
+                offstage: _selectedIndex != 3,
+                child: const UserProfileSCreen(),
+              ),
+            ],
+          ),
           bottomNavigationBar: BottomAppBar(
-            surfaceTintColor: Colors.white,
-            color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -110,22 +126,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen>
                   onTap: () => _onTap(1),
                 ),
                 NavTab(
-                  isSelected: _selectedIndex == 2,
+                  isSelected: _selectedIndex == 4,
                   icon: FontAwesomeIcons.penToSquare,
                   selectedIcon: FontAwesomeIcons.solidPenToSquare,
                   onTap: _onWriteButtonTap,
                 ),
                 NavTab(
-                  isSelected: _selectedIndex == 3,
+                  isSelected: _selectedIndex == 2,
                   icon: FontAwesomeIcons.heart,
                   selectedIcon: FontAwesomeIcons.solidHeart,
-                  onTap: () => _onTap(3),
+                  onTap: () => _onTap(2),
                 ),
                 NavTab(
-                  isSelected: _selectedIndex == 4,
+                  isSelected: _selectedIndex == 3,
                   icon: FontAwesomeIcons.user,
                   selectedIcon: FontAwesomeIcons.solidUser,
-                  onTap: () => _onTap(4),
+                  onTap: () => _onTap(3),
                 ),
               ],
             ),
