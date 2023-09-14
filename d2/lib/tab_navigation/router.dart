@@ -1,46 +1,57 @@
 import 'package:d2/features/settings/privacy_screen.dart';
 import 'package:d2/features/settings/setting_screen.dart';
 import 'package:d2/tab_navigation/main_navigation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
   routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) {
-        return const MainNavigationScreen(
-          tab: "",
+      pageBuilder: (context, state) {
+        return const MaterialPage(
+          child: MainNavigationScreen(
+            tab: "",
+          ),
         );
       },
     ),
     GoRoute(
       path: "/search",
-      builder: (context, state) {
-        return const MainNavigationScreen(
-          tab: "search",
+      pageBuilder: (context, state) {
+        return const MaterialPage(
+          child: MainNavigationScreen(
+            tab: "search",
+          ),
         );
       },
     ),
     GoRoute(
       path: "/activity",
-      builder: (context, state) {
-        return const MainNavigationScreen(
-          tab: "activity",
+      pageBuilder: (context, state) {
+        return const MaterialPage(
+          child: MainNavigationScreen(
+            tab: "activity",
+          ),
         );
       },
     ),
     GoRoute(
       path: "/profile",
-      builder: (context, state) {
-        return const MainNavigationScreen(
-          tab: "profile",
+      pageBuilder: (context, state) {
+        return const MaterialPage(
+          child: MainNavigationScreen(
+            tab: "profile",
+          ),
         );
       },
     ),
     GoRoute(
       path: "/settings",
-      builder: (context, state) {
-        return const SettingsScreen();
+      pageBuilder: (context, state) {
+        return const MaterialPage(
+          child: SettingsScreen(),
+        );
       },
       routes: [
         GoRoute(
@@ -53,21 +64,3 @@ final router = GoRouter(
     ),
   ],
 );
-// routes: [
-      //   GoRoute(
-      //     path: ":tab(home|search|activity|profile)",
-      //     builder: (context, state) {
-      //       final tab = state.params["tab"]!;
-      // return MainNavigationScreen(
-      //   tab: tab,
-      // );
-      //     },
-      //     routes: [
-      //       GoRoute(
-      //         path: "settings",
-      //         name: "settings",
-      //         builder: (context, state) => const SettingsScreen(),
-      //       ),
-      //     ],
-      //   ),
-      // ],

@@ -1,8 +1,10 @@
+import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/feed.dart';
 import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});
@@ -21,7 +23,9 @@ class FeedScreen extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isDarkMode(context) ? Colors.white : null,
+                    color: context.watch<PlatformThemeViewModel>().isDarkMode
+                        ? Colors.white
+                        : null,
                   ),
                   child: const Image(
                     width: Sizes.size52,

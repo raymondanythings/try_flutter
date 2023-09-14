@@ -1,5 +1,3 @@
-import 'package:d2/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlatformThemeRepository {
@@ -13,7 +11,7 @@ class PlatformThemeRepository {
     _preferences.setBool(_platformTheme, isDarkMode);
   }
 
-  bool getTheme(BuildContext context) {
-    return _preferences.getBool(_platformTheme) ?? isDarkMode(context);
+  bool? getTheme() {
+    return _preferences.getBool(_platformTheme);
   }
 }

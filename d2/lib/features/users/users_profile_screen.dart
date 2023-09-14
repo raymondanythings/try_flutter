@@ -1,3 +1,4 @@
+import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/common/views/widgets/button.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
@@ -7,6 +8,7 @@ import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class UserProfileSCreen extends StatefulWidget {
   const UserProfileSCreen({super.key});
@@ -258,7 +260,7 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final isDark = isDarkMode(context);
+    final isDark = context.watch<PlatformThemeViewModel>().isDarkMode;
     return Container(
       decoration: BoxDecoration(
         color: isDark

@@ -1,7 +1,9 @@
+import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class PrivacyScreen extends StatefulWidget {
   const PrivacyScreen({super.key});
@@ -22,7 +24,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = context.watch<PlatformThemeViewModel>().isDarkMode;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(

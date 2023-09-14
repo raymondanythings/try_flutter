@@ -1,13 +1,15 @@
 import 'dart:async';
 
+import 'package:d2/common/models/platform_theme_model.dart';
+import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/settings/privacy_screen.dart';
 import 'package:d2/utils.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -64,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = context.watch<PlatformThemeViewModel>().isDarkMode;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
@@ -116,6 +118,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
+          SwitchListTile.adaptive(
+            value: context.watch<PlatformThemeViewModel>().isDarkMode,
+            onChanged: (value) {
+              context.read<PlatformThemeViewModel>().setTheme(value);
+            },
+            title: const Text(
+              "Enable Dark Mode",
+            ),
+          ),
           const ListTile(
             leading: FaIcon(
               FontAwesomeIcons.userPlus,

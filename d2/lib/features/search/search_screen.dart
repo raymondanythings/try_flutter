@@ -1,9 +1,11 @@
+import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/search/widgets/search_tile.dart';
 import 'package:d2/utils.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -31,7 +33,9 @@ class SearchScreen extends StatelessWidget {
             ),
             child: CupertinoSearchTextField(
               style: TextStyle(
-                color: isDarkMode(context) ? Colors.white : null,
+                color: context.watch<PlatformThemeViewModel>().isDarkMode
+                    ? Colors.white
+                    : null,
               ),
             ),
           ),
