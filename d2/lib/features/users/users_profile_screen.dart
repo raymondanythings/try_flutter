@@ -1,4 +1,4 @@
-import 'package:d2/common/widgets/button.dart';
+import 'package:d2/common/views/widgets/button.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/avatar.dart';
