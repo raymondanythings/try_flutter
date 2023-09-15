@@ -1,17 +1,15 @@
 import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/search/widgets/search_tile.dart';
-import 'package:d2/utils.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -33,7 +31,7 @@ class SearchScreen extends StatelessWidget {
             ),
             child: CupertinoSearchTextField(
               style: TextStyle(
-                color: context.watch<PlatformThemeViewModel>().isDarkMode
+                color: ref.watch(platformThemeProvider).isDarkMode
                     ? Colors.white
                     : null,
               ),

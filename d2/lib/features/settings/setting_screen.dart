@@ -1,24 +1,22 @@
 import 'dart:async';
 
-import 'package:d2/common/models/platform_theme_model.dart';
 import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/utils.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _isLoading = false;
 
   void _popNavigation() {
@@ -66,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.watch<PlatformThemeViewModel>().isDarkMode;
+    final isDark = ref.watch(platformThemeProvider).isDarkMode;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
@@ -119,9 +117,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(
         children: [
           SwitchListTile.adaptive(
-            value: context.watch<PlatformThemeViewModel>().isDarkMode,
+            value: isDark,
             onChanged: (value) {
-              context.read<PlatformThemeViewModel>().setTheme(value);
+              ref.read(platformThemeProvider.notifier).setTheme(value);
             },
             title: const Text(
               "Enable Dark Mode",

@@ -3,7 +3,7 @@ import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/tab_navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -16,10 +16,10 @@ void main() async {
           Brightness.dark;
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => PlatformThemeViewModel(
+    ProviderScope(
+      overrides: [
+        platformThemeProvider.overrideWith(
+          () => PlatformThemeViewModel(
             repository,
             isDarkMode,
           ),
@@ -30,15 +30,15 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       title: 'Threads',
-      theme: context.watch<PlatformThemeViewModel>().isDarkMode
+      theme: ref.watch(platformThemeProvider).isDarkMode
           ? Theme.dark
           : Theme.light,
       darkTheme: ThemeData(

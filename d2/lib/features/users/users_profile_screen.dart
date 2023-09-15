@@ -3,28 +3,21 @@ import 'package:d2/common/views/widgets/button.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/avatar.dart';
-import 'package:d2/features/settings/setting_screen.dart';
-import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class UserProfileSCreen extends StatefulWidget {
+class UserProfileSCreen extends ConsumerStatefulWidget {
   const UserProfileSCreen({super.key});
 
   @override
-  State<UserProfileSCreen> createState() => _UserProfileSCreenState();
+  UserProfileSCreenState createState() => UserProfileSCreenState();
 }
 
-class _UserProfileSCreenState extends State<UserProfileSCreen> {
+class UserProfileSCreenState extends ConsumerState<UserProfileSCreen> {
   void _onGearPressed() {
     context.push("/settings");
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => const SettingsScreen(),
-    //   ),
-    // );
   }
 
   @override
@@ -260,7 +253,27 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final isDark = context.watch<PlatformThemeViewModel>().isDarkMode;
+    return const PersistentWithProvierWidget();
+  }
+
+  @override
+  double get maxExtent => 44;
+
+  @override
+  double get minExtent => 44;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+}
+
+class PersistentWithProvierWidget extends ConsumerWidget {
+  const PersistentWithProvierWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDark = ref.watch(platformThemeProvider).isDarkMode;
     return Container(
       decoration: BoxDecoration(
         color: isDark
@@ -303,17 +316,6 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
         ],
       ),
     );
-  }
-
-  @override
-  double get maxExtent => 44;
-
-  @override
-  double get minExtent => 44;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }
 

@@ -1,25 +1,32 @@
 import 'package:d2/common/models/platform_theme_model.dart';
 import 'package:d2/common/repositories/platform_theme_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PlatformThemeViewModel extends ChangeNotifier {
+class PlatformThemeViewModel extends Notifier<PlatformThemeModel> {
   final PlatformThemeRepository _repository;
   final bool isSystemDark;
 
-  late final PlatformThemeModel _model = PlatformThemeModel(
-    isDarkMode: _repository.getTheme() ?? isSystemDark,
-  );
-
-  bool get isDarkMode => _model.isDarkMode;
-
   void setTheme(bool value) {
     _repository.setTheme(value);
-    _model.isDarkMode = value;
-    notifyListeners();
+    state = PlatformThemeModel(
+      isDarkMode: value,
+    );
   }
 
   PlatformThemeViewModel(
     this._repository,
     this.isSystemDark,
   );
+
+  @override
+  PlatformThemeModel build() {
+    return PlatformThemeModel(
+      isDarkMode: _repository.getTheme() ?? isSystemDark,
+    );
+  }
 }
+
+final platformThemeProvider =
+    NotifierProvider<PlatformThemeViewModel, PlatformThemeModel>(
+  () => throw UnimplementedError(),
+);

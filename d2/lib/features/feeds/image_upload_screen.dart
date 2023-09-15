@@ -68,7 +68,6 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
 
   Future<void> _captureImage() async {
     final picture = await _cameraController.takePicture();
-    if (picture == null) return;
     _onUploadImages([picture]);
   }
 

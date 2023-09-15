@@ -2,15 +2,14 @@ import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/feeds/widgets/feed.dart';
-import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FeedScreen extends StatelessWidget {
+class FeedScreen extends ConsumerWidget {
   const FeedScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Expanded(
@@ -23,7 +22,7 @@ class FeedScreen extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: context.watch<PlatformThemeViewModel>().isDarkMode
+                    color: ref.watch(platformThemeProvider).isDarkMode
                         ? Colors.white
                         : null,
                   ),

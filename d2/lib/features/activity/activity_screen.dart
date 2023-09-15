@@ -1,8 +1,6 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/activity/features/activity_card.dart';
-import 'package:d2/features/search/widgets/search_tile.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
