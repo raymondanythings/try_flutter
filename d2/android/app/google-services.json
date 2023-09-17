@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "382692183595",
+    "project_id": "tiktok-flutter-raymond",
+    "storage_bucket": "tiktok-flutter-raymond.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382692183595:android:200f06dbb38eca9f56a46e",
+        "android_client_info": {
+          "package_name": "com.example.d2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAQqoHMqIVDGUALlm3s8din6vOCC4tCl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382692183595:android:11e20035c1ef683e56a46e",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAQqoHMqIVDGUALlm3s8din6vOCC4tCl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

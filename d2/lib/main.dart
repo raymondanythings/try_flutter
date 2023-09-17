@@ -1,6 +1,8 @@
 import 'package:d2/common/repositories/platform_theme_repository.dart';
 import 'package:d2/common/view_models/platform_theme_vm.dart';
+import 'package:d2/firebase_options.dart';
 import 'package:d2/tab_navigation/router.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: "Thread-raymond",
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final preferences = await SharedPreferences.getInstance();
   final repository = PlatformThemeRepository(preferences);
 
@@ -88,13 +94,14 @@ class MyApp extends ConsumerWidget {
           ),
         ),
       ),
-      routerConfig: router,
+      routerConfig: ref.watch(router),
     );
   }
 }
 
 class Theme {
   static final ThemeData light = ThemeData(
+    primaryColor: const Color(0xff0B63E0),
     textTheme: Typography.blackCupertino,
     scaffoldBackgroundColor: Colors.white,
     useMaterial3: true,
@@ -110,6 +117,7 @@ class Theme {
   );
 
   static final ThemeData dark = ThemeData(
+    primaryColor: const Color(0xff0B63E0),
     textTheme: Typography.whiteCupertino,
     useMaterial3: true,
     scaffoldBackgroundColor: const Color(
