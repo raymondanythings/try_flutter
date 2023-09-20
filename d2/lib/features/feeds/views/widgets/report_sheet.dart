@@ -1,6 +1,6 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/feeds/widgets/report_reason_item.dart';
+import 'package:d2/features/feeds/views/widgets/report_reason_item.dart';
 import 'package:flutter/material.dart';
 
 class ReportSheet extends StatelessWidget {

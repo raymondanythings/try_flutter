@@ -47,28 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBg3DqvZUbMaEIGXpsWBHWomRAXS6i10kY',
-    appId: '1:382692183595:web:d838435f925dfde356a46e',
-    messagingSenderId: '382692183595',
-    projectId: 'tiktok-flutter-raymond',
-    authDomain: 'tiktok-flutter-raymond.firebaseapp.com',
-    storageBucket: 'tiktok-flutter-raymond.appspot.com',
+    apiKey: 'AIzaSyCH33zKGeBaWHATiWcz-Pc6ptntWftxVAo',
+    appId: '1:356568245641:web:edf1fb2f00959f20322d58',
+    messagingSenderId: '356568245641',
+    projectId: 'thread-flutter-raymond',
+    authDomain: 'thread-flutter-raymond.firebaseapp.com',
+    storageBucket: 'thread-flutter-raymond.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCAQqoHMqIVDGUALlm3s8din6vOCC4tCl4',
-    appId: '1:382692183595:android:200f06dbb38eca9f56a46e',
-    messagingSenderId: '382692183595',
-    projectId: 'tiktok-flutter-raymond',
-    storageBucket: 'tiktok-flutter-raymond.appspot.com',
+    apiKey: 'AIzaSyCegukGgAoQxpA9t8JDUIePbc-imQpda9c',
+    appId: '1:356568245641:android:415e77b2409bbe8b322d58',
+    messagingSenderId: '356568245641',
+    projectId: 'thread-flutter-raymond',
+    storageBucket: 'thread-flutter-raymond.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBjg_Azw_52ftyU0B2pedw8w0HSldYWYjg',
-    appId: '1:382692183595:ios:bb82310d58d2132e56a46e',
-    messagingSenderId: '382692183595',
-    projectId: 'tiktok-flutter-raymond',
-    storageBucket: 'tiktok-flutter-raymond.appspot.com',
+    apiKey: 'AIzaSyCFrHAoPZRs9mR3ZQ7VijDT6tpMsZrRkGg',
+    appId: '1:356568245641:ios:f544ed89ef873693322d58',
+    messagingSenderId: '356568245641',
+    projectId: 'thread-flutter-raymond',
+    storageBucket: 'thread-flutter-raymond.appspot.com',
     iosBundleId: 'com.raymond.thread',
   );
 }

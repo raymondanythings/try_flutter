@@ -1,21 +1,26 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:d2/common/views/widgets/clickable.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/feeds/image_upload_screen.dart';
+import 'package:d2/features/auth/repository/auth_repository.dart';
+import 'package:d2/features/feeds/view_models/upload_feed_view_model.dart';
+import 'package:d2/features/feeds/views/image_upload_screen.dart';
+import 'package:d2/features/users/view_models/users_view_model.dart';
 import 'package:d2/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WriteFeed extends StatefulWidget {
+class WriteFeed extends ConsumerStatefulWidget {
   const WriteFeed({super.key});
 
   @override
-  State<WriteFeed> createState() => _WriteFeedState();
+  ConsumerState<WriteFeed> createState() => _WriteFeedState();
 }
 
-class _WriteFeedState extends State<WriteFeed> {
+class _WriteFeedState extends ConsumerState<WriteFeed> {
   void _onCancelTap() {
     Navigator.of(context).pop();
   }
@@ -56,6 +61,18 @@ class _WriteFeedState extends State<WriteFeed> {
     if (pictures.isEmpty) return;
     pictures.removeAt(index);
     setState(() {});
+  }
+
+  Future<void> _onPostTap() async {
+    ref.read(uploadFeedProvider.notifier).uploadThread(
+          _inputController.text,
+          pictures
+              .map(
+                (e) => File(e.path),
+              )
+              .toList(),
+          context,
+        );
   }
 
   @override
@@ -146,7 +163,7 @@ class _WriteFeedState extends State<WriteFeed> {
                             children: [
                               const CircleAvatar(
                                 foregroundImage: NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png",
+                                  "https://avatars.githubusercontent.com/u/73725736",
                                 ),
                               ),
                               Gaps.v14,
@@ -168,7 +185,7 @@ class _WriteFeedState extends State<WriteFeed> {
                                 child: CircleAvatar(
                                   radius: Sizes.size10,
                                   foregroundImage: NetworkImage(
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png",
+                                    "https://avatars.githubusercontent.com/u/73725736",
                                   ),
                                 ),
                               ),
@@ -293,19 +310,20 @@ class _WriteFeedState extends State<WriteFeed> {
                           fontSize: Sizes.size16 + Sizes.size2,
                         ),
                       ),
-                      AnimatedOpacity(
-                        opacity: _inputController.text.isNotEmpty ? 1 : 0.6,
-                        duration: const Duration(
-                          milliseconds: 200,
-                        ),
-                        child: Text(
-                          "Post",
-                          style: TextStyle(
-                            color: Colors.blue[700],
-                            fontSize: Sizes.size16 + Sizes.size2,
-                          ),
-                        ),
-                      )
+                      Clickable(
+                        onTap: _onPostTap,
+                        disabled: _inputController.text.isEmpty ||
+                            ref.watch(uploadFeedProvider).isLoading,
+                        child: ref.watch(uploadFeedProvider).isLoading
+                            ? const CircularProgressIndicator()
+                            : Text(
+                                "Post",
+                                style: TextStyle(
+                                  color: Colors.blue[700],
+                                  fontSize: Sizes.size16 + Sizes.size2,
+                                ),
+                              ),
+                      ),
                     ],
                   ),
                 ),

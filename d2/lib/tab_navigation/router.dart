@@ -1,3 +1,4 @@
+import 'package:d2/features/auth/repository/auth_repository.dart';
 import 'package:d2/features/auth/views/log_in_screen.dart';
 import 'package:d2/features/auth/views/sign_up_screen.dart';
 import 'package:d2/features/settings/privacy_screen.dart';
@@ -9,7 +10,17 @@ import 'package:go_router/go_router.dart';
 
 final router = Provider((ref) {
   return GoRouter(
-    initialLocation: LoginScreen.routeUrl,
+    initialLocation: '/',
+    redirect: (context, state) {
+      final isLoggedIn = ref.read(authRepository).isLoggedIn;
+      if (!isLoggedIn) {
+        if (state.subloc != SignUpScreen.routeUrl &&
+            state.subloc != LoginScreen.routeUrl) {
+          return SignUpScreen.routeUrl;
+        }
+      }
+      return null;
+    },
     routes: [
       GoRoute(
         path: LoginScreen.routeUrl,

@@ -1,7 +1,7 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/feeds/widgets/avatar.dart';
-import 'package:d2/features/feeds/widgets/feed_sheet.dart';
+import 'package:d2/features/feeds/views/widgets/avatar.dart';
+import 'package:d2/features/feeds/views/widgets/feed_sheet.dart';
 import 'package:d2/tab_navigation/widgets/members_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -156,7 +156,7 @@ class Feed extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ImageList != null
+                        ImageList != null && ImageList!.isNotEmpty
                             ? Container(
                                 padding: const EdgeInsets.only(
                                   bottom: Sizes.size10,

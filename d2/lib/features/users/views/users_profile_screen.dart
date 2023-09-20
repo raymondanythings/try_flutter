@@ -2,7 +2,7 @@ import 'package:d2/common/view_models/platform_theme_vm.dart';
 import 'package:d2/common/views/widgets/button.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/feeds/widgets/avatar.dart';
+import 'package:d2/features/feeds/views/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

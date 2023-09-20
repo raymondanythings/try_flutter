@@ -1,7 +1,7 @@
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
-import 'package:d2/features/feeds/widgets/report_sheet.dart';
-import 'package:d2/features/feeds/widgets/sheet_button.dart';
+import 'package:d2/features/feeds/views/widgets/report_sheet.dart';
+import 'package:d2/features/feeds/views/widgets/sheet_button.dart';
 import 'package:flutter/material.dart';
 
 class FeedSheet extends StatelessWidget {

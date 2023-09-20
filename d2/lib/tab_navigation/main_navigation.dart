@@ -1,9 +1,10 @@
 import 'package:d2/constants/sizes.dart';
 import 'package:d2/features/activity/activity_screen.dart';
-import 'package:d2/features/feeds/feed_screen.dart';
-import 'package:d2/features/feeds/widgets/write_feed.dart';
+import 'package:d2/features/feeds/views/feed_screen.dart';
+import 'package:d2/features/feeds/views/widgets/write_feed.dart';
+
 import 'package:d2/features/search/search_screen.dart';
-import 'package:d2/features/users/users_profile_screen.dart';
+import 'package:d2/features/users/views/users_profile_screen.dart';
 import 'package:d2/tab_navigation/widgets/nav_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

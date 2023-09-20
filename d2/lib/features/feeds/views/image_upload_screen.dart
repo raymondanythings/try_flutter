@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:d2/constants/gaps.dart';
 import 'package:d2/constants/sizes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,26 +15,27 @@ class ImageUploadScreen extends StatefulWidget {
   State<ImageUploadScreen> createState() => _ImageUploadScreenState();
 }
 
-class _ImageUploadScreenState extends State<ImageUploadScreen> {
+class _ImageUploadScreenState extends State<ImageUploadScreen>
+    with WidgetsBindingObserver {
   bool _hasPermission = false;
   bool _isSelfieMode = false;
   bool _isFlashOn = false;
-
-  late CameraController _cameraController;
+  late final bool _noCamera = kDebugMode && Platform.isIOS;
+  // late CameraController _cameraController = CameraController();
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
     if (cameras.isEmpty) {
       return;
     }
-    _cameraController = CameraController(
-      cameras[_isSelfieMode ? 1 : 0],
-      ResolutionPreset.ultraHigh,
-    );
+    // _cameraController = CameraController(
+    //   cameras[_isSelfieMode ? 1 : 0],
+    //   ResolutionPreset.ultraHigh,
+    // );
 
-    await _cameraController.initialize();
+    // await _cameraController.initialize();
 
-    await _cameraController.prepareForVideoRecording();
+    // await _cameraController.prepareForVideoRecording();
 
     setState(() {});
   }
@@ -49,6 +52,19 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
 
     if (!cameraDenied && !micDenied) {
       _hasPermission = true;
+      await initCamera();
+      setState(() {});
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (_noCamera) return;
+    if (!_hasPermission) return;
+    // if (!_cameraController.value.isInitialized) return;
+    if (state == AppLifecycleState.inactive) {
+      // _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
       initCamera();
     }
   }
@@ -59,20 +75,24 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
   }
 
   Future<void> _toggleFlash() async {
-    await _cameraController
-        .setFlashMode(_isFlashOn ? FlashMode.off : FlashMode.torch);
+    // await _cameraController
+    //     .setFlashMode(_isFlashOn ? FlashMode.off : FlashMode.torch);
     setState(() {
       _isFlashOn = !_isFlashOn;
     });
   }
 
   Future<void> _captureImage() async {
-    final picture = await _cameraController.takePicture();
-    _onUploadImages([picture]);
+    // final picture = await _cameraController.takePicture();
+    // _onUploadImages([picture]);
   }
 
   Future<void> _onPickImagePress() async {
-    final pictures = await ImagePicker().pickMultiImage();
+    final pictures = await ImagePicker().pickMultiImage(
+      imageQuality: 40,
+      maxWidth: 300,
+      maxHeight: 300,
+    );
     if (pictures.isEmpty) return;
     if (!mounted) return;
     _onUploadImages(pictures);
@@ -85,12 +105,20 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
   @override
   void initState() {
     super.initState();
-    initPermissions();
+    if (!_noCamera) {
+      initPermissions();
+    } else {
+      setState(() {
+        _hasPermission = true;
+      });
+    }
   }
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    if (!_noCamera) {
+      // _cameraController.dispose();
+    }
     super.dispose();
   }
 
@@ -103,7 +131,8 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: !_hasPermission || !_cameraController.value.isInitialized
+          // child: !_hasPermission || !_cameraController.value.isInitialized
+          child: !_hasPermission
               ? const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +167,9 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            CameraPreview(_cameraController),
+                            // if (!_noCamera &&
+                            //     _cameraController.value.isInitialized)
+                            //   CameraPreview(_cameraController),
                             Positioned(
                               top: MediaQuery.of(context).viewPadding.top +
                                   Sizes.size8,
@@ -159,7 +190,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   GestureDetector(
-                                    onTap: _toggleFlash,
+                                    // onTap: _toggleFlash,
                                     child: FaIcon(
                                       _isFlashOn
                                           ? Icons.flash_on
@@ -180,7 +211,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                                         ),
                                       ),
                                       GestureDetector(
-                                        onTap: _captureImage,
+                                        // onTap: _captureImage,
                                         child: Container(
                                           width: Sizes.size60,
                                           height: Sizes.size60,
@@ -193,7 +224,8 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                                     ],
                                   ),
                                   IconButton(
-                                    onPressed: _toggleSelfieMode,
+                                    onPressed: () {},
+                                    // onPressed: _toggleSelfieMode,
                                     icon: const FaIcon(
                                       FontAwesomeIcons.rotate,
                                       color: Colors.white,
