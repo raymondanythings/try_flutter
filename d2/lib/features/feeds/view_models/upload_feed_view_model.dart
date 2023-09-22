@@ -51,6 +51,7 @@ class UploadFeedViewModel extends AsyncNotifier<void> {
               creatorUid: user!.uid,
               createdAt: feedId,
               creator: userProfile.name,
+              keywords: feed.split(" ").map((e) => e.toLowerCase()).toList(),
             ),
           );
 

@@ -44,14 +44,6 @@ class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: Colors.grey.shade400,
-          ),
-        ),
-      ),
       padding: const EdgeInsets.symmetric(
         horizontal: Sizes.size14,
         vertical: Sizes.size14,

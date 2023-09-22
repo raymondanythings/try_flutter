@@ -22,9 +22,14 @@ class FeedRepository {
 
   Future<QuerySnapshot<Map<String, dynamic>>> fetchFeeds({
     int? lastItemCreatedAt,
+    String? keyword,
   }) {
     final query = _db
         .collection("feeds")
+        .where(
+          "keywords",
+          arrayContains: keyword,
+        )
         .orderBy("createdAt", descending: true)
         .limit(10);
     if (lastItemCreatedAt == null) {

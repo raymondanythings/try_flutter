@@ -6,6 +6,7 @@ class FeedModel {
   final String creator;
   final int createdAt;
   final List<String> imageList;
+  final List<String> keywords;
 
   const FeedModel({
     required this.thread,
@@ -15,6 +16,7 @@ class FeedModel {
     required this.creator,
     required this.createdAt,
     this.imageList = const [],
+    this.keywords = const [],
   });
 
   Map<String, dynamic> toJson() {
@@ -26,6 +28,7 @@ class FeedModel {
       "creator": creator,
       "createdAt": createdAt,
       "imageList": imageList,
+      "keywords": keywords,
     };
   }
 
@@ -36,5 +39,6 @@ class FeedModel {
         creatorUid = json["creatorUid"],
         creator = json["creator"],
         createdAt = json["createdAt"],
-        imageList = List<String>.from(json["imageList"]);
+        imageList = List<String>.from(json["imageList"]),
+        keywords = List<String>.from(json["keywords"]);
 }
